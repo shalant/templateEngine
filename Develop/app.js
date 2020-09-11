@@ -4,129 +4,93 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+var inquirer = require('inquirer');
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+var employees = []
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-var inquirer = require('inquirer');
-inquirer
-    .prompt([
-    /* Pass your questions in here */
-    const employeeQ = [
-        {
-        type: "input",
-        name: 'name',
-        message: 'What is your name?',
-        default: 'Enter name'
-        },
-        {
-        type: "input",
-        name: 'id',
-        message: 'What is your ID number??',
-        default: 'Enter ID number'
-        },
-        {
-        type: "input",
-        name: 'email',
-        message: 'What is your e-mail?',
-        default: 'Enter e-mail address'
-        }
-    ]
+//employee - name, id, email
 
-    const managerQ = [
-        {
-        type: "input",
-        name: 'name',
-        message: 'What is your name?',
-        default: 'Enter name'
-        },
-        {
-        type: "input",
-        name: 'id',
-        message: 'What is your ID number??',
-        default: 'Enter ID number'
-        },
-        {
-        type: "input",
-        name: 'email',
-        message: 'What is your e-mail?',
-        default: 'Enter e-mail address'
-        },
-        {
-        type: "input",
-        name: 'officeNum',
-        message: 'What is your office number?',
-        default: 'Enter e-mail address'
-        }
-    ]
+//Manager - office
+//Engineer - github
+//intern - school
 
-    const engineerQ = [
-        {
-        type: "input",
-        name: 'name',
-        message: 'What is your name?',
-        default: 'Enter name'
-        },
-        {
-        type: "input",
-        name: 'id',
-        message: 'What is your ID number??',
-        default: 'Enter ID number'
-        },
-        {
-        type: "input",
-        name: 'email',
-        message: 'What is your e-mail?',
-        default: 'Enter e-mail address'
-        },
-        {
-        type: "input",
-        name: 'github',
-        message: 'What is your github repo?',
-        default: 'Enter Github repo'
-        }
-    ]
+const employeeQ = [
+    {
+    type: "input",
+    name: 'name',
+    message: 'What is your name?',
+    default: 'Enter name'
+    },
+    {
+    type: "input",
+    name: 'id',
+    message: 'What is your ID number??',
+    default: 'Enter ID number'
+    },
+    {
+    type: "input",
+    name: 'email',
+    message: 'What is your e-mail?',
+    default: 'Enter e-mail address'
+    },
+    {
+        type: "list",
+        name: "role",
+        message: "what is the employee's role?",
+        choices: ["Manager", "Engineer", "Intern"]
+    }
+]
 
-    const internQ = [
-        {
-        type: "input",
-        name: 'name',
-        message: 'What is your name?',
-        default: 'Enter name'
-        },
-        {
-        type: "input",
-        name: 'id',
-        message: 'What is your ID number??',
-        default: 'Enter ID number'
-        },
-        {
-        type: "input",
-        name: 'email',
-        message: 'What is your e-mail?',
-        default: 'Enter e-mail address'
-        },
-        {
-        type: "input",
-        name: 'email',
-        message: 'What is your e-mail?',
-        default: 'Enter e-mail address'
-        },
-        {
-        type: "input",
-        name: 'email',
-        message: 'What is your e-mail?',
-        default: 'Enter e-mail address'
-        }
-    ]
+const managerQ = [
+   
+    {
+    type: "input",
+    name: 'officeNum',
+    message: 'What is your office number?',
+    default: 'Enter e-mail address'
+    }
+]
 
-  ])
+const engineerQ = [
+    {
+    type: "input",
+    name: 'github',
+    message: 'What is your github repo?',
+    default: 'Enter Github repo'
+    }
+]
+
+const internQ = [
+    {
+        type: "input",
+        name: "school",
+        message: "What is the intern's school?",
+    }
+]
+
+inquirer.prompt(employeeQ)
+.then(answers => {
+    if(answers.role === "Manager") {
+        //ask the manager question
+        //put this in a function
+        inquirer.prompt(managerQ).then(manager_answer => employees.push);
+    }
+    if(answers.role === "Engineer") {
+        inquirer.prompt(engineerQ).then(engineer_answer => employees.push);
+    }
+    if(answers.role === "Intern") {
+        inquirer.prompt(internQ).then(intern_answer => employees.push);
+    }
+})
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -145,17 +109,17 @@ inquirer
 //  .then(answers => {
     // Use user feedback for... whatever!!
     
-    .catch(error => {
-        if (error.isTtyError) {
-            // Prompt couldn't be rendered in the current environment
-        } else {
-            // Something else when wrong
-        }
+    // .catch(error => {
+    //     if (error.isTtyError) {
+    //         // Prompt couldn't be rendered in the current environment
+    //     } else {
+    //         // Something else when wrong
+    //     }
+    // }
 
 
 
-
-
+    
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
