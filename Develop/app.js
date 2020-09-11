@@ -16,19 +16,117 @@ const render = require("./lib/htmlRenderer");
 
 var inquirer = require('inquirer');
 inquirer
-  .prompt([
+    .prompt([
     /* Pass your questions in here */
+    const employeeQ = [
+        {
+        type: "input",
+        name: 'name',
+        message: 'What is your name?',
+        default: 'Enter name'
+        },
+        {
+        type: "input",
+        name: 'id',
+        message: 'What is your ID number??',
+        default: 'Enter ID number'
+        },
+        {
+        type: "input",
+        name: 'email',
+        message: 'What is your e-mail?',
+        default: 'Enter e-mail address'
+        }
+    ]
+
+    const managerQ = [
+        {
+        type: "input",
+        name: 'name',
+        message: 'What is your name?',
+        default: 'Enter name'
+        },
+        {
+        type: "input",
+        name: 'id',
+        message: 'What is your ID number??',
+        default: 'Enter ID number'
+        },
+        {
+        type: "input",
+        name: 'email',
+        message: 'What is your e-mail?',
+        default: 'Enter e-mail address'
+        },
+        {
+        type: "input",
+        name: 'officeNum',
+        message: 'What is your office number?',
+        default: 'Enter e-mail address'
+        }
+    ]
+
+    const engineerQ = [
+        {
+        type: "input",
+        name: 'name',
+        message: 'What is your name?',
+        default: 'Enter name'
+        },
+        {
+        type: "input",
+        name: 'id',
+        message: 'What is your ID number??',
+        default: 'Enter ID number'
+        },
+        {
+        type: "input",
+        name: 'email',
+        message: 'What is your e-mail?',
+        default: 'Enter e-mail address'
+        },
+        {
+        type: "input",
+        name: 'github',
+        message: 'What is your github repo?',
+        default: 'Enter Github repo'
+        }
+    ]
+
+    const internQ = [
+        {
+        type: "input",
+        name: 'name',
+        message: 'What is your name?',
+        default: 'Enter name'
+        },
+        {
+        type: "input",
+        name: 'id',
+        message: 'What is your ID number??',
+        default: 'Enter ID number'
+        },
+        {
+        type: "input",
+        name: 'email',
+        message: 'What is your e-mail?',
+        default: 'Enter e-mail address'
+        },
+        {
+        type: "input",
+        name: 'email',
+        message: 'What is your e-mail?',
+        default: 'Enter e-mail address'
+        },
+        {
+        type: "input",
+        name: 'email',
+        message: 'What is your e-mail?',
+        default: 'Enter e-mail address'
+        }
+    ]
+
   ])
-  .then(answers => {
-    // Use user feedback for... whatever!!
-  })
-  .catch(error => {
-    if(error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
-    } else {
-      // Something else when wrong
-    }
-  });
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -39,6 +137,24 @@ inquirer
 // `output` folder. You can use the variable `outputPath` above target this location.
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
+
+  const answers = render(await inquirer.prompt(employeeQ, internQ, managerQ, engineerQ));
+  outputPath('main.html', answers);
+  
+//is this redundant?
+//  .then(answers => {
+    // Use user feedback for... whatever!!
+    
+    .catch(error => {
+        if (error.isTtyError) {
+            // Prompt couldn't be rendered in the current environment
+        } else {
+            // Something else when wrong
+        }
+
+
+
+
 
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
