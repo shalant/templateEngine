@@ -5,16 +5,15 @@ const Employee = require("./Engineer");
 
 //inherit thingy
 class Engineer extends Employee {
-    constructor (id, officeNum, whatevs){
-        super(id, officeNum)
-        this.whatevs = whatevs
+    constructor (name, id, email, gitHub) {
+        super(name, id, email),
+        this.gitHub = gitHub
     }
-}
 
-
-//from readme:
-this.gitHub = gitHub
+//write getGitHub()function
 
 //methods:
-getGitHub()
-getRole() //overwritten to return "Engineer"
+//getGitHub()
+//getRole() //overwritten to return "Engineer"
+}
+module.exports = Engineer;

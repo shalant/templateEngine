@@ -2,26 +2,25 @@
 
 //overall constructor function creation
 class Employee {
-    constructor(name){
-       this.name = name,
-       this.id = id,
-       this.email = email,
-    }
+  constructor(name, id, email) {
+    this.name = name,
+      this.id = id,
+      this.email = email
+  };
 
-//methods:
-    getName() {
-        return this.name;
-      }
-    getID() {
-        return this.id;
-      }
-    getEmail() {
-        return this.email;
-      }
-    getRole() {
-        return 'Employee';
-      }
-
-
+  //methods:
+  getName() {
+    return this.name;
+  }
+  getID() {
+    return this.id;
+  }
+  getEmail() {
+    return this.email;
+  }
+  getRole() {
+    return 'Employee';
+  }
+}
 
 module.exports = Employee;
