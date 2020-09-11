@@ -4,7 +4,6 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-var inquirer = require('inquirer');
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -42,10 +41,10 @@ const employeeQ = [
     default: 'Enter e-mail address'
     },
     {
-        type: "list",
-        name: "role",
-        message: "what is the employee's role?",
-        choices: ["Manager", "Engineer", "Intern"]
+    type: "list",
+    name: "role",
+    message: "what is the employee's role?",
+    choices: ["Manager", "Engineer", "Intern"]
     }
 ]
 
@@ -58,6 +57,8 @@ const managerQ = [
     default: 'Enter e-mail address'
     }
 ]
+const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNum);
+employees.push(manager);
 
 const engineerQ = [
     {
@@ -67,6 +68,8 @@ const engineerQ = [
     default: 'Enter Github repo'
     }
 ]
+const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
+employees.push(engineer);
 
 const internQ = [
     {
@@ -75,6 +78,8 @@ const internQ = [
         message: "What is the intern's school?",
     }
 ]
+const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+employees.push(intern);
 
 inquirer.prompt(employeeQ)
 .then(answers => {
