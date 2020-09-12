@@ -10,7 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-var employees = []
+const employees = []
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -21,7 +21,7 @@ var employees = []
 //Engineer - github
 //intern - school
 
-const employeeQ = [
+const employeeQ = inquirer.prompt([
     {
     type: "input",
     name: 'name',
@@ -48,53 +48,61 @@ const employeeQ = [
     }
 ]
 
-const managerQ = [
-   
-    {
-    type: "input",
-    name: 'officeNum',
-    message: 'What is your office number?',
-    default: 'Enter e-mail address'
-    }
-]
-const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNum);
-employees.push(manager);
-
-const engineerQ = [
-    {
-    type: "input",
-    name: 'github',
-    message: 'What is your github repo?',
-    default: 'Enter Github repo'
-    }
-]
-const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
-employees.push(engineer);
-
-const internQ = [
-    {
-        type: "input",
-        name: "school",
-        message: "What is the intern's school?",
-    }
-]
-const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
-employees.push(intern);
-
-inquirer.prompt(employeeQ)
 .then(answers => {
     if(answers.role === "Manager") {
         //ask the manager question
         //put this in a function
         inquirer.prompt(managerQ).then(manager_answer => employees.push);
     }
-    if(answers.role === "Engineer") {
+    else if(answers.role === "Engineer") {
         inquirer.prompt(engineerQ).then(engineer_answer => employees.push);
     }
-    if(answers.role === "Intern") {
+    else if(answers.role === "Intern") {
         inquirer.prompt(internQ).then(intern_answer => employees.push);
     }
+    else {
+        render(employees)
+    }
 })
+
+function newManager() {
+    inquirer.prompt([ {
+        type: "input"
+        name: "officeNumber"
+        message: "What is the office number?"
+        default: "Enter a number"
+        }
+    ]).then (function(answers)) {
+        const manager = new Manager(answers.officeNumber);
+        employees.push(manager);
+    }
+}
+
+function newEngineer() {
+    inquirer.prompt([ {
+        type: "input"
+        name: "github"
+        message: "What is your Github repo?"
+        default: "www.github.com/yourname"
+        }.then (function(answers)) {
+            const engineer = new Engineer(answers.github);
+            employees.push(engineer);
+        }
+    ])
+}
+
+function newIntern() {
+    inquirer.prompt([ {
+        type: "input"
+        name: "school"
+        message: "What school did you attend?"
+        default: "State University"
+        }.then (function(answers)) {
+            const intern = new Intern(answers.school);
+            employees.push(intern);
+        }
+    ])
+}
 
 
 // After the user has input all employees desired, call the `render` function (required
