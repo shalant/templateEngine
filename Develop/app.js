@@ -46,7 +46,7 @@ const employeeQ = inquirer.prompt([
     message: "what is the employee's role?",
     choices: ["Manager", "Engineer", "Intern"]
     }
-]
+])
 
 .then(answers => {
     if(answers.role === "Manager") {
@@ -65,44 +65,50 @@ const employeeQ = inquirer.prompt([
     }
 })
 
-function newManager() {
+const managerQ = 
     inquirer.prompt([ {
-        type: "input"
-        name: "officeNumber"
-        message: "What is the office number?"
-        default: "Enter a number"
+        type: "input",
+        name: "officeNumber",
+        message: "What is the office number?",
+        default: "Enter a number",
         }
-    ]).then (function(answers)) {
+    ])
+    .then (function(answers) {
         const manager = new Manager(answers.officeNumber);
         employees.push(manager);
-    }
-}
+    })
 
-function newEngineer() {
+
+
+const engineerQ =  
     inquirer.prompt([ {
-        type: "input"
-        name: "github"
-        message: "What is your Github repo?"
+        type: "input",
+        name: "github",
+        message: "What is your Github repo?",
         default: "www.github.com/yourname"
-        }.then (function(answers)) {
+        }
+    ])
+        .then(function(answers) {
             const engineer = new Engineer(answers.github);
             employees.push(engineer);
+        })
+    
+
+const internQ = 
+    inquirer.prompt([ {
+        type: "input",
+        name: "school",
+        message: "What school did you attend?",
+        default: "State University"
         }
     ])
-}
-
-function newIntern() {
-    inquirer.prompt([ {
-        type: "input"
-        name: "school"
-        message: "What school did you attend?"
-        default: "State University"
-        }.then (function(answers)) {
+        .then (function(answers) {
             const intern = new Intern(answers.school);
             employees.push(intern);
-        }
-    ])
-}
+        })
+    
+    
+
 
 
 // After the user has input all employees desired, call the `render` function (required
@@ -115,8 +121,12 @@ function newIntern() {
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
 
-  const answers = render(await inquirer.prompt(employeeQ, internQ, managerQ, engineerQ));
-  outputPath('main.html', answers);
+
+    
+  render(inquirer.prompt([employeeQ, internQ, managerQ, engineerQ]))
+  .then(answers => {
+    outputPath('main.html', answers);
+  })
   
 //is this redundant?
 //  .then(answers => {
