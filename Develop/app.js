@@ -23,6 +23,12 @@ const employees = []
 
 const employeeQ = inquirer.prompt([
     {
+    type: "list",
+    name: "role",
+    message: "what is the employee's role?",
+    choices: ["Manager", "Engineer", "Intern"]
+    }
+    {
     type: "input",
     name: 'name',
     message: 'What is your name?',
@@ -40,12 +46,7 @@ const employeeQ = inquirer.prompt([
     message: 'What is your e-mail?',
     default: 'Enter e-mail address'
     },
-    {
-    type: "list",
-    name: "role",
-    message: "what is the employee's role?",
-    choices: ["Manager", "Engineer", "Intern"]
-    }
+    
 ])
 
 .then(answers => {
